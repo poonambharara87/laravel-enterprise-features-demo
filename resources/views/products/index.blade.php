@@ -1,4 +1,21 @@
 <x-layout/>
+
+<div class="flex justify-between items-center p-4 bg-white shadow-md">
+    <h1 class="text-2xl font-bold text-gray-800">
+        Products
+    </h1>
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button
+            type="submit"
+            class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200">
+            Logout
+        </button>
+    </form>
+</div>
+
+
 <div class="container mt-4">
     <table class="table table-striped table-bordered" id="products-table">
         <thead>

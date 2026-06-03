@@ -19,11 +19,14 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 
 Route::resource('products', App\Http\Controllers\ProductController::class);
 
+Route::post('/logout', function () {
+        Auth::logout();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
-Route::get('/test-register', function () {
-    return view('auth.register');
-});
+        return redirect('/login');
+    })->name('logout');
+
+
+

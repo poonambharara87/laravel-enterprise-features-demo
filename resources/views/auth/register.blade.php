@@ -1,8 +1,9 @@
 
 <x-layout/>
 
-<div class="max-w-md mx-auto p-8 border border-gray-300 rounded-lg">
-    <h2 class="text-2xl font-semibold mb-6">Register</h2>
+<div class="min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full p-8 border border-gray-300 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-6">Register</h2>
 
     <form action="{{ route('register.store') }}" method="POST">
         @csrf

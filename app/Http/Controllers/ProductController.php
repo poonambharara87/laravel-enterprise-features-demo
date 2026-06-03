@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use DataTables; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         
-        Gate::authorize('viewAny', Product::class);
+        Gate::authorize('products.index', User::class);
          if ($request->ajax()) {
 
             $data = Product::query();
@@ -25,7 +26,7 @@ class ProductController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="'.route('products.show', $row->id).'" class="btn btn-info btn-sm">View</a>';
       
                             return $btn;
                     })
@@ -92,7 +93,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+// dd($product);
         $product->update($request->all());
 
         if ($request->hasFile('image')) {
@@ -108,10 +109,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+         
         if ($product->image) {
             Storage::disk('public')->delete($product->image);
         }
         $product->delete(); 
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 }

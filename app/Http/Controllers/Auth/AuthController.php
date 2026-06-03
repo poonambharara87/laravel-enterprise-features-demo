@@ -52,6 +52,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors(['email' => 'Invalid credentials'])->withInput();
         }
         // Return a response with the token
-        return redirect()->route('product.index')->with('success', 'Login successful.');
+        return redirect()->route('products.index')->with('success', 'Login successful.');
     }
 }
+

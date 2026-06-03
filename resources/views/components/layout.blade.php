@@ -12,8 +12,6 @@
 
 </head>
 <body>
-    <h1 class="text-3xl font-bold text-center mt-10 mb-12">
-      Sign Up
-    </h1>
+   
 </body>
 </html>
